@@ -1,10 +1,30 @@
 pipeline {
-agent none
-stages {
-stage ('BUILD') {
-steps {
- sh 'sleep 5'
-}
-}
-}
+	agent none  
+	stages {
+		stage('BUILD') {
+			agent { label 'master' }
+			steps {
+					sleep 5
+					echo This is the fist stage: BUILD
+				'''
+			}	
+		}
+		
+		stage('TEST') {
+			agent { label 'node2' }
+			steps {
+					sleep 5
+					echo This is the fist stage: TEST
+				'''
+			}	
+		}
+		
+		stage('DEPLOY') {
+			agent { label 'node1' }
+			steps {
+					echo This is the fist stage: DEPLOY
+				'''
+			}	
+		}
+	}
 }
