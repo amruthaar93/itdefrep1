@@ -1,5 +1,9 @@
 pipeline {
-    agent any 
+    agent any
+
+trigger{
+pollSCM
+}
 
     tools {
         maven 'maven-3.9.2'
@@ -20,7 +24,7 @@ pipeline {
         stage ('Deploy-Tomcat') {
             steps {
                 script {
-                    deploy adapters: [tomcat9(credentialsId: 'tomcat-deploy', path: '', url: 'http://43.204.112.85:8080/')], 
+                    deploy adapters: [tomcat9(credentialsId: 'tomcat-deploy', path: '', url: 'http://13.233.151.209:8080/')], 
                                      contextPath: '/itdefined-war-1.0.0', 
                                      war: 'maven/simple-war/target/itdefined-war-1.0.0.war'
                 }
